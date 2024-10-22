@@ -25,7 +25,8 @@ SECRET_KEY = 'django-insecure-81o#64+h#5hr3ir3)b@7ec%f95zj@1t1+a18)$1)-a1evbb-a!
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['8000-hugoht3-boutiqueado-w7nkxdnmiyv.ws.codeinstitute-ide.net']
+ALLOWED_HOSTS = ['8000-hugoht3-boutiqueado-w7nkxdnmiyv.ws.codeinstitute-ide.net',
+'localhost', '127.0.0.1', 'https://8000-yourusername-boutiqueado-abc123.ws.codeinstitute-ide.net']
 
 
 # Application definition
@@ -34,10 +35,32 @@ INSTALLED_APPS = [
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
+    'django.contrib.sites',
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'allauth',
+    'allauth.account',
+    'allauth.socialaccount',
 ]
+
+AUTHENTICATION_BACKENDS = (
+    'django.contrib.auth.backends.ModelBackend',
+    'allauth.account.auth_backends.AuthenticationBackend',
+)
+
+
+SITE_ID = 1
+
+EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
+
+ACCOUNT_AUTHENTICATION_METHOD = 'username_email'
+ACCOUNT_EMAIL_REQUIRED = True
+ACCOUNT_EMAIL_VERIFICATION = 'mandatory'
+ACCOUNT_SIGNUP_EMAIL_ENTER_TWICE = True
+ACCOUNT_USERNAME_MIN_LENGTH = 4
+LOGIN_URL = '/accounts/login/'
+LOGIN_REDIRECT_URL = '/'
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
@@ -47,6 +70,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'allauth.account.middleware.AccountMiddleware',
 ]
 
 ROOT_URLCONF = 'boutique_ado.urls'
@@ -59,7 +83,7 @@ TEMPLATES = [
         'OPTIONS': {
             'context_processors': [
                 'django.template.context_processors.debug',
-                'django.template.context_processors.request',
+                'django.template.context_processors.request', # REQUIRED BY ALLAUTH
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
             ],
@@ -68,6 +92,12 @@ TEMPLATES = [
 ]
 
 WSGI_APPLICATION = 'boutique_ado.wsgi.application'
+
+CSRF_TRUSTED_ORIGINS = [
+    'https://8000-hugoht3-boutiqueado-fffy0xd2mgi.ws.codeinstitute-ide.net',
+    'https://*.codeinstitute-ide.net'
+    
+]
 
 
 # Database
