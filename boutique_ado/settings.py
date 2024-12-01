@@ -25,8 +25,16 @@ SECRET_KEY = 'p@ei#69*b*zz3u4yie-$()@cy^l(+x9&@6ypx+r0lm(3%_9hr7'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['8000-hugoht3-boutiqueado-w7nkxdnmiyv.ws.codeinstitute-ide.net']
+ALLOWED_HOSTS = [
+    '8000-hugoht3-boutiqueado-w7nkxdnmiyv.ws.codeinstitute-ide.net',
+    'localhost',
+    '127.0.0.1'
+]
 
+
+CSRF_TRUSTED_ORIGINS = [
+    'https://8000-hugoht3-boutiqueado-w7nkxdnmiyv.ws.codeinstitute-ide.net'
+]
 
 # Application definition
 
